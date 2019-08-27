@@ -1,7 +1,6 @@
 // These statistics are © Apu Kapadia, 2005
 // used with permission
-// regex is /^(\d*)\s([AKQJT2-9s]*)\s(\d{1,2}\.\d{2}\s+)(\d{1,2}\.\d{2}\s+)(\d{1,2}\.\d{2}\s*)/
-// replace string is "{pair:'$2', wins: '$3', ties: '$4'},"
+
 const arry = [
   { pair: 'AA', wins: '84.97	 ', ties: '0.57	' },
   { pair: 'KK', wins: '82.10	 ', ties: '0.58	' },

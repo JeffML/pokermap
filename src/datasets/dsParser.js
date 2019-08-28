@@ -39,4 +39,4 @@ const getDataSet = (p) => {
   return { headings, rows }
 }
 
-console.dir(getDataSet(2), { depth: 4 })
+export default getDataSet;

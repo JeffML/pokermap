@@ -33,8 +33,19 @@
 }
 
 th {
-  font-size: 8pt;
-  transform: rotate(-90.0deg);
-  text-align: right;
-  padding-bottom: 14px;
+  /* font-size: 8pt; */
+  /* transform: rotate(-90.0deg); */
+  /* text-align: right; */
+  /* padding-bottom: 14px; */
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+
 }

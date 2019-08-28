@@ -48,15 +48,7 @@ const PlayersRow = (props) => {
         Players:
       </div>
       <div className="row" style={{ marginLeft: "30%" }}>
-        <PlayerRadio {...{ value: "2", ...props }} />
-        <PlayerRadio {...{ value: "3", ...props }} />
-        <PlayerRadio {...{ value: "4", ...props }} />
-        <PlayerRadio {...{ value: "5", ...props }} />
-        <PlayerRadio {...{ value: "6", ...props }} />
-        <PlayerRadio {...{ value: "7", ...props }} />
-        <PlayerRadio {...{ value: "9", ...props }} />
-        <PlayerRadio {...{ value: "9", ...props }} />
-        <PlayerRadio {...{ value: "10", ...props }} />
+        {[2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => <PlayerRadio {...{ value, ...props }} />)}
       </div>
     </div>
   </div>

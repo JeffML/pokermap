@@ -20,6 +20,10 @@ const getCells = (set, card) => {
       const i = headings.indexOf(c2);
       row[i] = parseFloat(wins)
     }
+    if (c2 === card && !suited) {   //FIXME need to handle suited
+      const i = headings.indexOf(c1);
+      row[i] = parseFloat(wins)
+    }
   })
   return row;
 }

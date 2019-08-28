@@ -1,6 +1,6 @@
 import React from "react"
-const Headings = ({ data }) => {
-  const titles = () => data.map(h => <th key={h}>{h}</th>)
+const Headings = ({ headings }) => {
+  const titles = () => headings.map(h => <th key={h}>{h}</th>)
   return (<tr><th></th>{titles()}</tr>);
 }
 

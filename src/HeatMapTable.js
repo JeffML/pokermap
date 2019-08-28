@@ -4,11 +4,11 @@ import Headings from './Headings';
 import dsParser from './datasets/dsParser';
 
 
-const { headings, rows } = dsParser(5);
+// const { headings, rows } = dsParser(5);
 
-// console.dir(input, { depth: 3 })
-const heatMap = new HeatMap(headings, rows);
-const data = heatMap.getData();
+// // console.dir(input, { depth: 3 })
+// const heatMap = new HeatMap(headings, rows);
+// const data = heatMap.getData();
 
 const background = (rgb) => {
   return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
@@ -22,8 +22,8 @@ const Cols = ({ cells }) => {
   </td>);
 }
 
-const Rows = () =>
-  data.rows.map((row, i) => <tr key={row.label}>
+const Rows = ({ rows }) =>
+  rows.map((row, i) => <tr key={row.label}>
     <td>{row.label}</td><Cols cells={row.cells} />
   </tr>
   );
@@ -64,12 +64,12 @@ const SuitedRow = () =>
     </div>
   </div>
 
-const HeatMapRow = () => <div className="row">
+const HeatMapRow = ({ data }) => <div className="row">
   <div className="column">
     <table>
       <tbody>
-        <Headings data={data.headings} />
-        <Rows />
+        <Headings headings={data.headings} />
+        <Rows rows={data.rows} />
       </tbody>
     </table>
   </div>
@@ -79,12 +79,18 @@ const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
 
+  const { headings, rows } = dsParser(5);
+
+  // console.dir(input, { depth: 3 })
+  const heatMap = new HeatMap(headings, rows);
+  const data = heatMap.getData();
+
   return <div>
     <PlayersRow {...{ players, setPlayers }} />
     <br></br>
     <SuitedRow {...{ suited, setSuited }} />
     <br></br>
-    <HeatMapRow />
+    <HeatMapRow data={data} />
   </div>
 }
 

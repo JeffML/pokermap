@@ -28,9 +28,9 @@ const Rows = () =>
   </tr>
   );
 
-const PlayerRadio = ({ value, checked }) => {
+const PlayerRadio = ({ players, value }) => {
   return <label style={{ marginRight: "10px" }}>
-    <input type="radio" name="players" value={value} defaultChecked={checked}></input>
+    <input type="radio" name="players" value={value} defaultChecked={players == value}></input>
     {value}</label>;
 }
 
@@ -40,25 +40,27 @@ const SuitedRadio = ({ value, checked }) => {
     {value}</label>;
 }
 
-const PlayersRow = () =>
-  <div className="row">
+const PlayersRow = (props) => {
+  console.log(props)
+  return <div className="row">
     <div className="column" style={{ alignItems: "center" }}>
       <div className="row">
         Players:
       </div>
       <div className="row" style={{ marginLeft: "30%" }}>
-        <PlayerRadio value="2" checked={true} />
-        <PlayerRadio value="3" />
-        <PlayerRadio value="4" />
-        <PlayerRadio value="5" />
-        <PlayerRadio value="6" />
-        <PlayerRadio value="7" />
-        <PlayerRadio value="8" />
-        <PlayerRadio value="9" />
-        <PlayerRadio value="10" />
+        <PlayerRadio {...{ value: "2", ...props }} />
+        <PlayerRadio {...{ value: "3", ...props }} />
+        <PlayerRadio {...{ value: "4", ...props }} />
+        <PlayerRadio {...{ value: "5", ...props }} />
+        <PlayerRadio {...{ value: "6", ...props }} />
+        <PlayerRadio {...{ value: "7", ...props }} />
+        <PlayerRadio {...{ value: "9", ...props }} />
+        <PlayerRadio {...{ value: "9", ...props }} />
+        <PlayerRadio {...{ value: "10", ...props }} />
       </div>
     </div>
   </div>
+}
 
 const SuitedRow = () =>
   <div className="row">
@@ -70,11 +72,14 @@ const SuitedRow = () =>
     </div>
   </div>
 
-const HeatMapTable = () =>
-  <div>
-    <PlayersRow />
+const HeatMapTable = () => {
+  const [players, setPlayers] = useState(2);
+  const [suited, setSuited] = useState(false)
+
+  return <div>
+    <PlayersRow {...{ players, setPlayers }} />
     <br></br>
-    <SuitedRow />
+    <SuitedRow {...{ suited, setSuited }} />
     <br></br>
     <div className="row">
       <div className="column">
@@ -87,5 +92,6 @@ const HeatMapTable = () =>
       </div>
     </div>
   </div>
+}
 
 export default HeatMapTable;

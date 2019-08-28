@@ -8,6 +8,7 @@ import win8 from './winning8.js'
 import win9 from './winning9.js'
 import win10 from './winning10.js'
 
+//eslint-disable-next-line no-sparse-arrays
 const sets = [, , win2, win3, win4, win5, win6, win7, win8, win9, win10];
 const headings = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
 

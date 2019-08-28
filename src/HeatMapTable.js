@@ -64,6 +64,17 @@ const SuitedRow = () =>
     </div>
   </div>
 
+const HeatMapRow = () => <div className="row">
+  <div className="column">
+    <table>
+      <tbody>
+        <Headings data={data.headings} />
+        <Rows />
+      </tbody>
+    </table>
+  </div>
+</div>
+
 const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
@@ -73,16 +84,7 @@ const HeatMapTable = () => {
     <br></br>
     <SuitedRow {...{ suited, setSuited }} />
     <br></br>
-    <div className="row">
-      <div className="column">
-        <table>
-          <tbody>
-            <Headings data={data.headings} />
-            <Rows />
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <HeatMapRow />
   </div>
 }
 

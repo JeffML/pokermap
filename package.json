@@ -1,6 +1,7 @@
 {
   "name": "heatmaptable",
   "version": "0.1.0",
+  "type": "module",
   "dependencies": {
     "jsheatmap": "^1.0.2",
     "react": "^16.9.0",

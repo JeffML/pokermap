@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import HeatMap, { Style } from "jsheatmap";
+import HeatMap, { Style } from "jsheatmap";  //eslint-disable-line no-unused-vars
 import Headings from './Headings';
 import dsParser from './datasets/dsParser';
-
-
-// const { headings, rows } = dsParser(5);
-
-// // console.dir(input, { depth: 3 })
-// const heatMap = new HeatMap(headings, rows);
-// const data = heatMap.getData();
 
 const background = (rgb) => {
   return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
@@ -30,7 +23,7 @@ const Rows = ({ rows }) =>
 
 const PlayerRadio = ({ players, value }) => {
   return <label style={{ marginRight: "10px" }}>
-    <input type="radio" name="players" value={value} defaultChecked={players == value}></input>
+    <input type="radio" name="players" value={value} defaultChecked={players === value}></input>
     {value}</label>;
 }
 
@@ -75,15 +68,19 @@ const HeatMapRow = ({ data }) => <div className="row">
   </div>
 </div>
 
+const getNewData = (players, suited) => {
+  const { headings, rows } = dsParser(2);
+
+  const heatMap = new HeatMap(headings, rows);
+  const data = heatMap.getData();
+  return data;
+}
+
 const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
 
-  const { headings, rows } = dsParser(2);
-
-  // console.dir(input, { depth: 3 })
-  const heatMap = new HeatMap(headings, rows);
-  const data = heatMap.getData();
+  const data = getNewData(players, suited);
 
   return <div>
     <PlayersRow {...{ players, setPlayers }} />

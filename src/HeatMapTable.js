@@ -79,7 +79,7 @@ const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
 
-  const { headings, rows } = dsParser(5);
+  const { headings, rows } = dsParser(2);
 
   // console.dir(input, { depth: 3 })
   const heatMap = new HeatMap(headings, rows);

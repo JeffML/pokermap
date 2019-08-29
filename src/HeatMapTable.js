@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeatMap, { Style } from "jsheatmap";  //eslint-disable-line no-unused-vars
 import Headings from './Headings';
 import dsParser from './datasets/dsParser';
@@ -21,9 +21,11 @@ const Rows = ({ rows }) =>
   </tr>
   );
 
-const PlayerRadio = ({ players, value }) => {
+const PlayerRadio = ({ players, value, setPlayers }) => {
   return <label style={{ marginRight: "10px" }}>
-    <input type="radio" name="players" value={value} defaultChecked={players === value}></input>
+    <input type="radio" name="players"
+      value={value} defaultChecked={players === value}
+      onClick={(e) => setPlayers(parseInt(e.target.value))}></input>
     {value}</label>;
 }
 
@@ -34,7 +36,6 @@ const SuitedRadio = ({ value, checked }) => {
 }
 
 const PlayersRow = (props) => {
-  console.log(props)
   return <div className="row">
     <div className="column" style={{ alignItems: "center" }}>
       <div className="row">
@@ -68,8 +69,9 @@ const HeatMapRow = ({ data }) => <div className="row">
   </div>
 </div>
 
+
 const getNewData = (players, suited) => {
-  const { headings, rows } = dsParser(2);
+  const { headings, rows } = dsParser(players);
 
   const heatMap = new HeatMap(headings, rows);
   const data = heatMap.getData();
@@ -79,8 +81,13 @@ const getNewData = (players, suited) => {
 const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
+  const [data, setData] = useState(getNewData(players, suited))
 
-  const data = getNewData(players, suited);
+  useEffect(() => {
+    const data = getNewData(players, suited);
+    setData(data)
+  }, [players, suited])
+
 
   return <div>
     <PlayersRow {...{ players, setPlayers }} />

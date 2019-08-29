@@ -29,9 +29,11 @@ const PlayerRadio = ({ players, value, setPlayers }) => {
     {value}</label>;
 }
 
-const SuitedRadio = ({ value, checked }) => {
+const SuitedRadio = ({ value, checked, setSuited }) => {
   return <label style={{ marginRight: "10px" }}>
-    <input type="radio" name="suited" value={value} defaultChecked={checked}></input>
+    <input type="radio" name="suited"
+      value={value} defaultChecked={checked}
+      onClick={(e) => setSuited(e.target.value === "suited")}></input>
     {value}</label>;
 }
 
@@ -48,12 +50,12 @@ const PlayersRow = (props) => {
   </div>
 }
 
-const SuitedRow = () =>
+const SuitedRow = ({ setSuited }) =>
   <div className="row">
     <div className="column" style={{ alignItems: "center" }}>
       <div className="row">
-        <SuitedRadio value="suited" />
-        <SuitedRadio value="unsuited" checked={true} />
+        <SuitedRadio value="suited" setSuited={setSuited} />
+        <SuitedRadio value="unsuited" setSuited={setSuited} checked={true} />
       </div>
     </div>
   </div>
@@ -71,7 +73,7 @@ const HeatMapRow = ({ data }) => <div className="row">
 
 
 const getNewData = (players, suited) => {
-  const { headings, rows } = dsParser(players);
+  const { headings, rows } = dsParser(players, suited);
 
   const heatMap = new HeatMap(headings, rows);
   const data = heatMap.getData();

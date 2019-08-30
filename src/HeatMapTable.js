@@ -95,12 +95,32 @@ const HeatMapTable = () => {
   }, [players, suited, ties])
 
 
-  return <div>
-    <PlayersRow {...{ players, setPlayers }} />
+  const InfoRow = () => <div>
     <br></br>
-    <SuitedRow {...{ setSuited, setTies }} />
+    <hr></hr>
+    <p>
+      Given any two hole cards, what are the chances of winning pre-flop in Texas Holdem?
+      This table visualizes those percentage odds.
+    </p><p>
+      <b>Players</b>: number of players at the table; more players lessens the odds.
+    </p>
+    <p> <b>Suited/Unsuited</b>: Odds are slightly more favorable for non-paired hole cards if they are suited.</p>
+    <p> <b>Include Ties</b>: Add tied hands (split pots) to winning odds.</p>
+    <p style={{ marginTop: "3rem", fontSize: ".7em" }}>
+      <a href="https://cs.indiana.edu/~kapadia/nofoldem/">These statistics</a> were compiled by Dr. Apu Kapadia at Indiana University. Used with permission.
+  </p>
+  </div>
+
+  return <div className="row">
+    <div className="column">
+      <PlayersRow {...{ players, setPlayers }} />
+      <SuitedRow {...{ setSuited, setTies }} />
+      <InfoRow />
+    </div>
     <br></br>
-    <HeatMapRow data={data} />
+    <div className="double-column">
+      <HeatMapRow data={data} />
+    </div>
   </div>
 }
 

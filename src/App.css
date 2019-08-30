@@ -51,5 +51,26 @@ th {
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+  margin: 20px;
+}
 
+.double-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
+table {
+  table-layout: fixed;
+  width: 600px;
+}
+
+p {
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+a {
+  color: dodgerblue;
 }

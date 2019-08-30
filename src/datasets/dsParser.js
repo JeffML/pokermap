@@ -12,29 +12,34 @@ import win10 from './winning10.js'
 const sets = [, , win2, win3, win4, win5, win6, win7, win8, win9, win10];
 const headings = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
 
-const getCells = (set, card, suited) => {
+const getCells = (set, card, suited, includeTies) => {
   const row = [];
   set.forEach(s => {
-    const { pair, wins } = s;
+    const { pair, wins, ties } = s;
     const [c1, c2, isSuited] = pair.split('')
-    if (c1 === card && (suited ? isSuited || c1 === c2 : !isSuited)) {
+
+    const include = suited ? isSuited || c1 === c2 : !isSuited
+    const fTies = includeTies ? parseFloat(ties) : 0.0
+    const value = parseFloat(wins) + fTies
+
+    if (c1 === card && include) {
       const i = headings.indexOf(c2);
-      row[i] = parseFloat(wins)
+      row[i] = value
     }
-    if (c2 === card && (suited ? isSuited || c1 === c2 : !isSuited)) {
+    if (c2 === card && include) {
       const i = headings.indexOf(c1);
-      row[i] = parseFloat(wins)
+      row[i] = value
     }
   })
   return row;
 }
 
-const getDataSet = (players, suited) => {
+const getDataSet = (players, suited, ties) => {
   const set = sets[players];
-  const rows = new Array(headings.length)
+  const rows = []
 
   headings.forEach((card) => {
-    rows.push([card, getCells(set, card, suited)])
+    rows.push([card, getCells(set, card, suited, ties)])
   });
 
   return { headings, rows }

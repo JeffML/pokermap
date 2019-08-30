@@ -3,9 +3,7 @@ import HeatMap, { Style } from "jsheatmap";  //eslint-disable-line no-unused-var
 import Headings from './Headings';
 import dsParser from './datasets/dsParser';
 
-const background = (rgb) => {
-  return `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
-}
+const background = (rgb) => `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
 
 const Cols = ({ cells }) => {
   return cells.colors.map((c, i) => <td key={i}>
@@ -50,15 +48,18 @@ const PlayersRow = (props) => {
   </div>
 }
 
-const SuitedRow = ({ setSuited }) =>
+const SuitedRow = ({ setSuited, setTies }) =>
   <div className="row">
-    <div className="column" style={{ alignItems: "center" }}>
-      <div className="row">
-        <SuitedRadio value="suited" setSuited={setSuited} />
-        <SuitedRadio value="unsuited" setSuited={setSuited} checked={true} />
-      </div>
+    <div className="column">
+      <SuitedRadio value="suited" setSuited={setSuited} />
+      <SuitedRadio value="unsuited" setSuited={setSuited} checked={true} />
+    </div><div className="column">
+      <Ties {...{ setTies }} />
     </div>
   </div>
+
+const Ties = ({ setTies }) =>
+  <label><input type='checkbox' onClick={(e) => setTies(e.target.checked)}></input>Include Ties</label>
 
 const HeatMapRow = ({ data }) => <div className="row">
   <div className="column">
@@ -72,8 +73,8 @@ const HeatMapRow = ({ data }) => <div className="row">
 </div>
 
 
-const getNewData = (players, suited) => {
-  const { headings, rows } = dsParser(players, suited);
+const getNewData = (players, suited, ties) => {
+  const { headings, rows } = dsParser(players, suited, ties);
 
   const heatMap = new HeatMap(headings, rows);
   const data = heatMap.getData();
@@ -83,18 +84,21 @@ const getNewData = (players, suited) => {
 const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
-  const [data, setData] = useState(getNewData(players, suited))
+  const [ties, setTies] = useState(false)
+  const [data, setData] = useState(getNewData(players, suited, ties))
 
   useEffect(() => {
-    const data = getNewData(players, suited);
+    // console.log({ players, suited, ties })
+    const data = getNewData(players, suited, ties);
+    // console.log(data.rows)
     setData(data)
-  }, [players, suited])
+  }, [players, suited, ties])
 
 
   return <div>
     <PlayersRow {...{ players, setPlayers }} />
     <br></br>
-    <SuitedRow {...{ suited, setSuited }} />
+    <SuitedRow {...{ setSuited, setTies }} />
     <br></br>
     <HeatMapRow data={data} />
   </div>

@@ -7,7 +7,7 @@ const background = (rgb) => `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.b
 
 const Cols = ({ cells }) => {
   return cells.colors.map((c, i) => <td key={i}>
-    <div style={{ background: background(c), height: '40px', width: '40px' }}>
+    <div style={{ background: background(c), height: '2.3rem', width: '2.3rem' }}>
       <span style={{ fontSize: '0.6em' }}>{cells.values[i].toFixed(1)}</span>
     </div>
   </td>);
@@ -106,21 +106,34 @@ const HeatMapTable = () => {
     </p>
     <p> <b>Suited/Unsuited</b>: Odds are slightly more favorable for non-paired hole cards if they are suited.</p>
     <p> <b>Include Ties</b>: Add tied hands (split pots) to winning odds.</p>
-    <p style={{ marginTop: "3rem", fontSize: ".7em" }}>
-      <a href="https://cs.indiana.edu/~kapadia/nofoldem/">These statistics</a> were compiled by Dr. Apu Kapadia at Indiana University. Used with permission.
-  </p>
   </div>
 
-  return <div className="row">
-    <div className="column">
-      <PlayersRow {...{ players, setPlayers }} />
-      <SuitedRow {...{ setSuited, setTies }} />
-      <InfoRow />
+  const AboutRow = () => <div className="row" style={{marginTop: "-10px"}}>
+    <div className="column" style={{ marginTop: "0px" }}>
+      <p style={{ fontSize: ".7em" }}>
+        <a href="https://www.jeffamabob.com/posts/holecardmap">My blog post</a> has more information about this application.
+      </p>
     </div>
-    <br></br>
     <div className="double-column">
-      <HeatMapRow data={data} />
+      <p style={{ fontSize: ".7em" }}>
+        <a href="https://cs.indiana.edu/~kapadia/nofoldem/">These statistics</a> were compiled by Dr. Apu Kapadia at Indiana University. Used with permission.
+      </p>
     </div>
+  </div>
+
+  return <div >
+    <div className="row">
+      <div className="column">
+        <PlayersRow {...{ players, setPlayers }} />
+        <SuitedRow {...{ setSuited, setTies }} />
+        <InfoRow />
+      </div>
+      <br></br>
+      <div className="double-column">
+        <HeatMapRow data={data} />
+      </div>
+    </div>
+    <AboutRow />
   </div>
 }
 

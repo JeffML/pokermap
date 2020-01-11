@@ -1,14 +1,14 @@
 {
-	"folders": [
-		{
-			"path": "/home/jlowery2663/projects/sterno"
-		},
-		{
-			"path": "/home/jlowery2663/projects/sternomap"
-		},
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "/home/jlowery2663/projects/sterno"
+    },
+    {
+      "path": "."
+    },
+    {
+      "path": "/home/jlowery2663/projects/pgnfen2"
+    }
+  ],
+  "settings": {}
 }

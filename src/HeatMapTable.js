@@ -61,6 +61,14 @@ const SuitedRow = ({ setSuited, setTies }) =>
 const Ties = ({ setTies }) =>
   <label><input type='checkbox' onClick={(e) => setTies(e.target.checked)}></input>Include Ties</label>
 
+
+const LogarithmRow = ({setLogN}) => (<div className="row">
+  <div className="column">
+    <label style={{fontSize: 'smaller'}}><input type='checkbox' onClick={(e) => setLogN(e.target.checked)}></input>&nbsp;Use Logarithmic Scaling</label>
+  </div>
+</div>)
+
+
 const HeatMapRow = ({ data }) => <div className="row">
   <div className="column">
     <table>
@@ -73,11 +81,12 @@ const HeatMapRow = ({ data }) => <div className="row">
 </div>
 
 
-const getNewData = (players, suited, ties) => {
+const getNewData = (players, suited, ties, logn) => {
   const { headings, rows } = dsParser(players, suited, ties);
+  console.log({players, suited, ties, logn })
 
   const heatMap = new HeatMap(headings, rows);
-  const data = heatMap.getData();
+  const data = heatMap.getData({logn});
   return data;
 }
 
@@ -85,14 +94,13 @@ const HeatMapTable = () => {
   const [players, setPlayers] = useState(2);
   const [suited, setSuited] = useState(false)
   const [ties, setTies] = useState(false)
-  const [data, setData] = useState(getNewData(players, suited, ties))
+  const [logN, setLogN] = useState(false);
+  const [data, setData] = useState(getNewData(players, suited, ties, logN))
 
   useEffect(() => {
-    // console.log({ players, suited, ties })
-    const data = getNewData(players, suited, ties);
-    // console.log(data.rows)
+    const data = getNewData(players, suited, ties, logN);
     setData(data)
-  }, [players, suited, ties])
+  }, [players, suited, ties, logN])
 
 
   const InfoRow = () => <div>
@@ -126,6 +134,7 @@ const HeatMapTable = () => {
       <div className="column">
         <PlayersRow {...{ players, setPlayers }} />
         <SuitedRow {...{ setSuited, setTies }} />
+        <LogarithmRow {...{setLogN}}></LogarithmRow>
         <InfoRow />
       </div>
       <br></br>

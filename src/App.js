@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import HeatMap from './HeatMapTable';
+import HeatMap from './HeatMapTable.js';
 
 class App extends Component {
   render() {

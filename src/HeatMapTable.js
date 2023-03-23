@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HeatMap, { Style } from "jsheatmap";  //eslint-disable-line no-unused-vars
-import Headings from './Headings';
-import dsParser from './datasets/dsParser';
+import Headings from './Headings.js';
+import dsParser from './datasets/dsParser.js';
 
 const background = (rgb) => `rgb(${rgb.red * 100}%, ${rgb.green * 100}%, ${rgb.blue * 100}%)`;
 

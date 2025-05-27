@@ -119,7 +119,7 @@ const HeatMapTable = () => {
   const AboutRow = () => <div className="row" style={{marginTop: "-10px"}}>
     <div className="column" style={{ marginTop: "0px" }}>
       <p style={{ fontSize: ".7em" }}>
-        <a href="https://www.jeffamabob.com/posts/holecardmap">My blog post</a> has more information about this application.
+        <a href="https://medium.com/gitconnected/a-heat-map-for-texas-holdem-8b431224191a">My blog post</a> has more information about this application.
       </p>
     </div>
     <div className="double-column">
